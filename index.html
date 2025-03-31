@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animated Login & Signup</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         
         * {
@@ -73,6 +74,48 @@
             margin-bottom: 15px;
             text-align: center;
         }
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        .social-login a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            color: rgb(253, 253, 253);
+            font-size: 20px;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+        .google { background: #db4437; }
+        .github { background: #333; }
+        .linkedin { background: #0077b5; }
+        .social-login a:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        .or-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .or-divider::before,
+        .or-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px dashed #888;
+            margin: 0 10px;
+        }
+
         input {
             padding: 12px;
             border: 1px solid #ccc;
@@ -125,6 +168,12 @@
         <div class="right" id="right">
             <form id="loginForm" class="form active" action="/login" method="POST">
                 <h2>Login</h2>
+                <div class="social-login">
+                    <a href="#" class="google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="github"><i class="fab fa-github"></i></a>
+                    <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <p class="or-divider">or login using your credentials</p>
                 <input type="text" placeholder="Username" required>
                 <input type="password" placeholder="Password" required>
                 <button id= "loginBtn" type="submit">Login</button>
