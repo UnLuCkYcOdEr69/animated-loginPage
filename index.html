@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Login & Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #a8c0ff, #e0c3fc);
+            transition: background 0.5s ease-in-out;
+        }
+        .container {
+            position: relative;
+            width: 800px;
+            height: 500px;
+            background: white;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .left, .right {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: transform 0.5s ease-in-out, background 0.5s ease-in-out;
+            position: absolute;
+            height: 100%;
+        }
+        .left {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            left: 0;
+            z-index: 2;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .left h2, .left p {
+            margin-bottom: 15px;
+        }
+        .right {
+            padding: 20px;
+            right: 0;
+            background: white;
+            z-index: 1;
+        }
+        .form {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+        }
+        .form h2 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            font-size: 16px;
+        }
+        input:focus {
+            border-color: #2575fc;
+            outline: none;
+            box-shadow: 0px 0px 10px rgba(37, 117, 252, 0.5);
+        }
+        button {
+            padding: 12px;
+            border: none;
+            background: #2575fc;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #1a5bb8;
+            transform: scale(1.05);
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .shift-left {
+            transform: translateX(-100%);
+        }
+        .shift-right {
+            transform: translateX(100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="left" id="left">
+            <h2 id="welcomeText">Welcome Back!</h2>
+            <p id="descText">Login to continue your journey.</p>
+            <button id="toggleBtn">Sign Up</button>
+        </div>
+        <div class="right" id="right">
+            <form id="loginForm" class="form active" action="/login" method="POST">
+                <h2>Login</h2>
+                <input type="text" placeholder="Username" required>
+                <input type="password" placeholder="Password" required>
+                <button id= "loginBtn" type="submit">Login</button>
+            </form>
+            <form id="signupForm" class="form hidden" action="/signup" method="POST">
+                <h2>Sign Up</h2>
+                <input type="text" placeholder="Username" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button id="signupBtn" type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const toggleBtn = document.getElementById('toggleBtn');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const welcomeText = document.getElementById('welcomeText');
+        const descText = document.getElementById('descText');
+        const left = document.getElementById('left');
+        const right = document.getElementById('right');
+        const body = document.body;
+
+
+        toggleBtn.addEventListener('click', () => {
+            if (loginForm.classList.contains('active')) {
+                loginForm.classList.remove('active');
+                loginForm.classList.add('hidden');
+                signupForm.classList.remove('hidden');
+                signupForm.classList.add('active');
+                welcomeText.textContent = 'Join Us!';
+                descText.textContent = 'Create an account to get started.';
+                toggleBtn.textContent = 'Login';
+                left.classList.add('shift-right');
+                right.classList.add('shift-left');
+                left.style.background = 'linear-gradient(135deg, #ff7eb3, #ff758c)';
+                body.style.background = 'linear-gradient(135deg, #fbc2eb, #a6c1ee)';
+                signupBtn.style.background = '#fa5570';
+                signupBtn.style.boxShadow = '0px 0px 10px rgba(255, 117, 140, 0.5)';
+                toggleBtn.style.background = '#fa5570';
+            } else {
+                signupForm.classList.remove('active');
+                signupForm.classList.add('hidden');
+                loginForm.classList.remove('hidden');
+                loginForm.classList.add('active');
+                welcomeText.textContent = 'Welcome Back!';
+                descText.textContent = 'Login to continue your journey.';
+                toggleBtn.textContent = 'Sign Up';
+                left.classList.remove('shift-right');
+                right.classList.remove('shift-left');
+                left.style.background = 'linear-gradient(135deg, #6a11cb, #2575fc)';
+                body.style.background = 'linear-gradient(135deg, #a8c0ff, #e0c3fc)';
+                loginBtn.style.background = '#2575fc';
+                loginBtn.style.boxShadow = '0px 0px 10px rgba(37, 117, 252, 0.5)';
+                toggleBtn.style.background = '#2575fc';
+            }
+        });
+    </script>
+</body>
+</html>
